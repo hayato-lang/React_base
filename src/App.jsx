@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ColorfulMessage from "./components/ColorfulMessage";
 
 const App = () => {
   const [num, setNum] = useState(0);
-  const [faceShowFlag, setFaceShowFlag] = useState(true);
+  const [faceShowFlag, setFaceShowFlag] = useState(false);
   const onclickCount = () => {
     setNum(num + 1);
   };
@@ -11,6 +11,17 @@ const App = () => {
   const onClickSwichShowFlag = () => {
     setFaceShowFlag(!faceShowFlag);
   };
+
+  useEffect(() => {
+    if (num > 0) {
+      if (num % 3 === 0) {
+        faceShowFlag || setFaceShowFlag(true);
+      } else {
+        faceShowFlag && setFaceShowFlag(false);
+      }
+    }
+  }, [num]);
+
   return (
     <>
       <h1 style={{ color: "red" }}>こんにちは</h1>
